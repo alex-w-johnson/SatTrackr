@@ -55,6 +55,9 @@ void loop() {
         idx++;
         delay(20);
       }
+      else {
+        Serial.println("WE'VE TRIED EVERYTHING AND WE'RE OUT OF IDEAS!");
+      }
       delay(50);
     }
 
