@@ -1,0 +1,30 @@
+Overview\+:
+\begin{DoxyItemize}
+\item \doxyref{Introduction}{p.}{appdoc_main_appdoc_SatTrackr_sensortest_intro}
+\item \doxyref{Usage}{p.}{appdoc_main_appdoc_SatTrackr_sensortest_usage}
+\item \doxyref{Compilation Info}{p.}{appdoc_main_appdoc_SatTrackr_sensortest_compinfo}
+\item \doxyref{Contact Information}{p.}{appdoc_main_appdoc_SatTrackr_sensortest_contactinfo}
+\end{DoxyItemize}\section{Introduction}\label{appdoc_main_appdoc_SatTrackr_sensortest_intro}
+This application demonstrates the sensor readout and serial interface functionality of the Sat\+Trackr board. It is intended for testing, debugging, and demonstration of these functions.\subsection{for Setting Up Objects and Variables}\label{appdoc_main_Procedure}
+The following steps are performed in sequence to prepare the board for reading sensors and serial commands\+:
+\begin{DoxyItemize}
+\item Begin I2C Protocol Interface
+\item Begin Serial Interface and Set Baud Rate
+\item Set Synchronization with R\+TC
+\item Identify I\+MU I2C Address
+\item I\+MU Calibration
+\item I\+MU Accelerometer and Gyroscope Initialization
+\item Identify I\+MU Magnetometer I2C Address
+\item Initialize and Calibrate I\+MU Magnetometer
+\end{DoxyItemize}\section{Usage}\label{appdoc_main_appdoc_SatTrackr_sensortest_usage}
+This application is designed to read a serial input string of the following form\+: $\vert$ num.\+f , num.\+f , int, int, int;
+\begin{DoxyItemize}
+\item Bitwise \char`\"{}or\char`\"{} character,
+\item followed by a float from -\/180.\+0 to 180.\+0 for the commanded azimuth angle (0.\+0 === North), then a comma
+\item Followed by a float from 0.\+0 to 90.\+0 for the commanded elevation angle (0.\+0 === Horizon), then a comma
+\item Followed by an integer from 0 to 23 for the commanded local time hour (0 === midnight), then a comma
+\item Followed by an integer from 0 to 59 for the commanded local time minute, then a comma
+\item Followed by an integer from 0 to 59 for the commanded local time second, then a semicolon to indicate end-\/of-\/line From this command, the code then runs a loop to check whether the I\+M\+Us measured orientation matches to within 5 degrees of the commanded azimuth and elevation, and whether the current time is within five seconds of the commanded time. Once these logical statements are evaluated and found to be true, a success message is output over serial.
+\end{DoxyItemize}\section{Compilation Info}\label{appdoc_main_appdoc_SatTrackr_sensortest_compinfo}
+This software can be compiled for use on an Arduino Nano, Mega, or Uno, and can be uploaded to the Sat\+Trackr Board rev. A as a hex file uploaded via the I\+C\+SP header.\section{Contact Information}\label{appdoc_main_appdoc_SatTrackr_sensortest_contactinfo}
+For more information on the Sat\+Trackr board, visit\+: {\tt https\+://github.\+com/alex-\/w-\/johnson/\+Sat\+Trackr}. 

@@ -1,0 +1,253 @@
+\section{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c File Reference}
+\label{_sat_trackr__combined__sketch_8c}\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+{\ttfamily \#include $<$D\+S3232\+R\+T\+C.\+h$>$}\newline
+{\ttfamily \#include $<$M\+P\+U9250.\+h$>$}\newline
+{\ttfamily \#include $<$quaternion\+Filters.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \textbf{ debug\+Yaw}~false
+\begin{DoxyCompactList}\small\item\em Includes R\+TC Library. \end{DoxyCompactList}\item 
+\#define \textbf{ imu\+Debug\+Mode}~false
+\begin{DoxyCompactList}\small\item\em Imu debugging. \end{DoxyCompactList}\item 
+\#define \textbf{ I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS}~0x69
+\begin{DoxyCompactList}\small\item\em I\+MU I2C address when A\+D0 pin is pulled down. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ setup} ()
+\item 
+void \textbf{ loop} ()
+\item 
+void \textbf{ print\+Self\+Test\+Results} (M\+P\+U9250 imu, byte imu\+\_\+address, bool debug\+Mode)
+\begin{DoxyCompactList}\small\item\em Prints the results of the I\+MU self test for debugging information to serial. \end{DoxyCompactList}\item 
+void \textbf{ print\+Calibration\+Results} (M\+P\+U9250 imu, byte imu\+\_\+address, bool debug\+Mode)
+\begin{DoxyCompactList}\small\item\em Prints the results of the I\+MU calibration for debugging information to serial. \end{DoxyCompactList}\item 
+void \textbf{ plot\+Angles} (float yaw, float pitch)
+\begin{DoxyCompactList}\small\item\em Prints the pitch and yaw angles as \char`\"{}pitch.\+f \textbackslash{}t yaw.\+f\char`\"{}. \end{DoxyCompactList}\item 
+void \textbf{ check\+Pointing} (float pitch, float yaw, float azimuth, float elevation)
+\begin{DoxyCompactList}\small\item\em Evaluates whether I\+MU is pointed in the right place at the right time. \end{DoxyCompactList}\item 
+void \textbf{ print\+Angles\+I\+MU} (M\+P\+U9250 imu, byte imu\+\_\+address, bool debug\+Mode)
+\begin{DoxyCompactList}\small\item\em Prints the Euler angles of the I\+MU. \end{DoxyCompactList}\item 
+void \textbf{ print\+Yaw} (float yaw)
+\begin{DoxyCompactList}\small\item\em Prints the yaw angle of the I\+MU. \end{DoxyCompactList}\item 
+void \textbf{ plot\+Quats} ()
+\begin{DoxyCompactList}\small\item\em Prints the quaternion components of the I\+MU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+M\+P\+U9250 \textbf{ I\+M\+U1}
+\begin{DoxyCompactList}\small\item\em Creates I\+MU object. \end{DoxyCompactList}\item 
+int \textbf{ int\+Pin} = 12
+\item 
+int \textbf{ my\+Led} = 13
+\item 
+String \textbf{ received\+String} = \char`\"{}\char`\"{}
+\item 
+const int \textbf{ row\+Length} = 5
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\label{_sat_trackr__combined__sketch_8c_abf961632dfb5d5401c7628eca4c1224a}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!debug\+Yaw@{debug\+Yaw}}
+\index{debug\+Yaw@{debug\+Yaw}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{debug\+Yaw}
+{\footnotesize\ttfamily \#define debug\+Yaw~false}
+
+
+
+Includes R\+TC Library. 
+
+Includes M\+P\+U9250 Library.\+Includes Mahoney filter library.\+Yaw debugging. \mbox{\label{_sat_trackr__combined__sketch_8c_a876dd1c5b74457dcd636dc38cadc5e4b}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS@{I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS}}
+\index{I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS@{I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS}
+{\footnotesize\ttfamily \#define I\+M\+U1\+\_\+\+A\+D\+D\+R\+E\+SS~0x69}
+
+
+
+I\+MU I2C address when A\+D0 pin is pulled down. 
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_aae902ee68b6f6127dab6cb6ae4edefd9}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!imu\+Debug\+Mode@{imu\+Debug\+Mode}}
+\index{imu\+Debug\+Mode@{imu\+Debug\+Mode}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{imu\+Debug\+Mode}
+{\footnotesize\ttfamily \#define imu\+Debug\+Mode~false}
+
+
+
+Imu debugging. 
+
+
+
+\subsection{Function Documentation}
+\mbox{\label{_sat_trackr__combined__sketch_8c_af2b0d2eab64fd709ec608ec07794e222}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!check\+Pointing@{check\+Pointing}}
+\index{check\+Pointing@{check\+Pointing}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{check\+Pointing()}
+{\footnotesize\ttfamily void check\+Pointing (\begin{DoxyParamCaption}\item[{float}]{pitch,  }\item[{float}]{yaw,  }\item[{float}]{azimuth,  }\item[{float}]{elevation }\end{DoxyParamCaption})}
+
+
+
+Evaluates whether I\+MU is pointed in the right place at the right time. 
+
+Checks if measured azimuth and elevation are within 5 degrees of the commanded angles, and the measured R\+TC time is within five seconds of the commanded imaging time. 
+\begin{DoxyParams}{Parameters}
+{\em yaw} & is the I\+MU yaw angle \\
+\hline
+{\em pitch} & is the I\+MU pitch angle \\
+\hline
+{\em azimuth} & is the commanded azimuth angle \\
+\hline
+{\em elevation} & is the commanded elevation angle \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_afe461d27b9c48d5921c00d521181f12f}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!loop@{loop}}
+\index{loop@{loop}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{loop()}
+{\footnotesize\ttfamily void loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_adf540be30ede5cc6d14ab7d1cd346330}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!plot\+Angles@{plot\+Angles}}
+\index{plot\+Angles@{plot\+Angles}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{plot\+Angles()}
+{\footnotesize\ttfamily void plot\+Angles (\begin{DoxyParamCaption}\item[{float}]{yaw,  }\item[{float}]{pitch }\end{DoxyParamCaption})}
+
+
+
+Prints the pitch and yaw angles as \char`\"{}pitch.\+f \textbackslash{}t yaw.\+f\char`\"{}. 
+
+This function works nicely with the serial line plotter in the Arduino I\+DE, but also is a nice way to see the I\+MU\textquotesingle{}s orientation in real time via the serial monitor. 
+\begin{DoxyParams}{Parameters}
+{\em yaw} & is the I\+MU yaw angle \\
+\hline
+{\em pitch} & is the I\+MU pitch angle \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_abd2c91046cad8fbb76452242c3de68ce}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!plot\+Quats@{plot\+Quats}}
+\index{plot\+Quats@{plot\+Quats}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{plot\+Quats()}
+{\footnotesize\ttfamily void plot\+Quats (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Prints the quaternion components of the I\+MU. 
+
+Good for debugging quaternion output using the Arduino serial plotter. \mbox{\label{_sat_trackr__combined__sketch_8c_a6600591a00932c541a3f450878881222}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!print\+Angles\+I\+MU@{print\+Angles\+I\+MU}}
+\index{print\+Angles\+I\+MU@{print\+Angles\+I\+MU}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{print\+Angles\+I\+M\+U()}
+{\footnotesize\ttfamily void print\+Angles\+I\+MU (\begin{DoxyParamCaption}\item[{M\+P\+U9250}]{imu,  }\item[{byte}]{imu\+\_\+address,  }\item[{bool}]{debug\+Mode }\end{DoxyParamCaption})}
+
+
+
+Prints the Euler angles of the I\+MU. 
+
+This function only does anything if debug\+Mode is set to true, so if not used for debugging, it can just as easily be deleted to improve program readability. 
+\begin{DoxyParams}{Parameters}
+{\em imu} & is the I\+MU object created in the setup function \\
+\hline
+{\em imu\+\_\+adddress} & is the I2C byte address of the I\+MU \\
+\hline
+{\em debug\+Mode} & is a boolean that determines whether anything prints \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_a2c7a4b02ec46b550fb1b02379dc8084c}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!print\+Calibration\+Results@{print\+Calibration\+Results}}
+\index{print\+Calibration\+Results@{print\+Calibration\+Results}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{print\+Calibration\+Results()}
+{\footnotesize\ttfamily void print\+Calibration\+Results (\begin{DoxyParamCaption}\item[{M\+P\+U9250}]{imu,  }\item[{byte}]{imu\+\_\+address,  }\item[{bool}]{debug\+Mode }\end{DoxyParamCaption})}
+
+
+
+Prints the results of the I\+MU calibration for debugging information to serial. 
+
+This function only does anything if debug\+Mode is set to true, so if not used for debugging, it can just as easily be deleted to improve program readability. 
+\begin{DoxyParams}{Parameters}
+{\em imu} & is the I\+MU object created in the setup function \\
+\hline
+{\em imu\+\_\+adddress} & is the I2C byte address of the I\+MU \\
+\hline
+{\em debug\+Mode} & is a boolean that determines whether anything prints \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_a99f6a6499c0fee7f56ed687ca8921d28}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!print\+Self\+Test\+Results@{print\+Self\+Test\+Results}}
+\index{print\+Self\+Test\+Results@{print\+Self\+Test\+Results}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{print\+Self\+Test\+Results()}
+{\footnotesize\ttfamily void print\+Self\+Test\+Results (\begin{DoxyParamCaption}\item[{M\+P\+U9250}]{imu,  }\item[{byte}]{imu\+\_\+address,  }\item[{bool}]{debug\+Mode }\end{DoxyParamCaption})}
+
+
+
+Prints the results of the I\+MU self test for debugging information to serial. 
+
+This function only does anything if debug\+Mode is set to true, so if not used for debugging, it can just as easily be deleted to improve program readability. 
+\begin{DoxyParams}{Parameters}
+{\em imu} & is the I\+MU object created in the setup function \\
+\hline
+{\em imu\+\_\+adddress} & is the I2C byte address of the I\+MU \\
+\hline
+{\em debug\+Mode} & is a boolean that determines whether anything prints \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_ac05114e96de1e0a6cdef7c44b55e71d8}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!print\+Yaw@{print\+Yaw}}
+\index{print\+Yaw@{print\+Yaw}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{print\+Yaw()}
+{\footnotesize\ttfamily void print\+Yaw (\begin{DoxyParamCaption}\item[{float}]{yaw }\end{DoxyParamCaption})}
+
+
+
+Prints the yaw angle of the I\+MU. 
+
+It just prints yaw, rotation about z-\/axis from North 
+\begin{DoxyParams}{Parameters}
+{\em yaw} & is the I\+MU yaw angle \\
+\hline
+\end{DoxyParams}
+\mbox{\label{_sat_trackr__combined__sketch_8c_a4fc01d736fe50cf5b977f755b675f11d}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!setup@{setup}}
+\index{setup@{setup}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{setup()}
+{\footnotesize\ttfamily void setup (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\label{_sat_trackr__combined__sketch_8c_ad9fc3f567ec1359fe73d406a150cd785}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!I\+M\+U1@{I\+M\+U1}}
+\index{I\+M\+U1@{I\+M\+U1}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{I\+M\+U1}
+{\footnotesize\ttfamily M\+P\+U9250 I\+M\+U1}
+
+
+
+Creates I\+MU object. 
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_a09d4740c930d56ab6ceebc10a09d679e}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!int\+Pin@{int\+Pin}}
+\index{int\+Pin@{int\+Pin}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{int\+Pin}
+{\footnotesize\ttfamily int int\+Pin = 12}
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_a2fa6cbdc498aa5d9f5e304354dfda93c}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!my\+Led@{my\+Led}}
+\index{my\+Led@{my\+Led}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{my\+Led}
+{\footnotesize\ttfamily int my\+Led = 13}
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_a48cd73bf649bff9e9d657c1da753e7ff}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!received\+String@{received\+String}}
+\index{received\+String@{received\+String}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{received\+String}
+{\footnotesize\ttfamily String received\+String = \char`\"{}\char`\"{}}
+
+\mbox{\label{_sat_trackr__combined__sketch_8c_a1cabcf8958162a8509806db015b22af1}} 
+\index{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}!row\+Length@{row\+Length}}
+\index{row\+Length@{row\+Length}!Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c@{Sat\+Trackr\+\_\+combined\+\_\+sketch.\+c}}
+\subsubsection{row\+Length}
+{\footnotesize\ttfamily const int row\+Length = 5}
+
